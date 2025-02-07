@@ -1,20 +1,76 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
-export default function App() {
+const CylinderSurfaceCalculator = () => {
+  const [radius, setRadius] = useState("");
+  const [height, setHeight] = useState("");
+  const [surfaceArea, setSurfaceArea] = useState(null);
+
+  const calculateSurfaceArea = () => {
+    const r = parseFloat(radius);
+    const h = parseFloat(height);
+    if (!isNaN(r) && !isNaN(h) && r > 0 && h > 0) {
+      const area = 2 * Math.PI * r * (r + h);
+      setSurfaceArea(area.toFixed(2));
+    } else {
+      setSurfaceArea("Hibás bemenet");
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.label}>Sugár (r):</Text>
+      <TextInput
+        style={styles.input}
+        keyboardType="numeric"
+        value={radius}
+        onChangeText={setRadius}
+      />
+      <Text style={styles.label}>Magasság (h):</Text>
+      <TextInput
+        style={styles.input}
+        keyboardType="numeric"
+        value={height}
+        onChangeText={setHeight}
+      />
+      <Button title="Számítás" onPress={calculateSurfaceArea} />
+      {surfaceArea !== null && (
+        <Text style={styles.result}>Felszín: {surfaceArea}</Text>
+      )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+    backgroundColor: "#f5f5f5",
+  },
+  label: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginVertical: 10,
+    color: "#333",
+  },
+  input: {
+    width: "85%",
+    height: 45,
+    borderColor: "#007bff",
+    borderWidth: 2,
+    marginBottom: 12,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+  },
+  result: {
+    fontSize: 22,
+    marginTop: 20,
+    fontWeight: "bold",
+    color: "#d9534f",
   },
 });
+
+export default CylinderSurfaceCalculator;
