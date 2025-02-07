@@ -1,3 +1,14 @@
+/*
+* File: App.js
+* Author: Klíber Benedek
+* Copyright: 2025, Klíber Benedek
+* Group: Szoft II/1/N
+* Date: 2025-02-07
+* Github: https://github.com/Elydra5
+* Licenc: GNU GPL
+*/
+
+
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
